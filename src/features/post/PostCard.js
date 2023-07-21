@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Link,
@@ -25,6 +25,9 @@ function PostCard({ post }) {
   //   setOpen(true);
   // };
   const { user } = useAuth();
+  const [exPostId] = useState(post.author._id);
+
+  console.log("exPostId:", exPostId);
   return (
     <Card>
       <CardHeader
@@ -51,7 +54,7 @@ function PostCard({ post }) {
             {fDate(post.createdAt)}
           </Typography>
         }
-        action={post.author._id === user._id && <PostMenu post={post} />}
+        action={exPostId === user._id && <PostMenu post={post} />}
       />
 
       <Stack spacing={2} sx={{ p: 3 }}>

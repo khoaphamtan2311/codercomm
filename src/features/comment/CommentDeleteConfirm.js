@@ -7,14 +7,14 @@ import { Button } from "@mui/material";
 import { deleteComment } from "./commentSlice";
 import { useDispatch } from "react-redux";
 
-function CommentDeleteConfirm({ open, setCommentId, commentId }) {
+function CommentDeleteConfirm({ open, setCommentId, commentId, postId }) {
   const handleClose = () => {
     setCommentId("");
   };
   const dispatch = useDispatch();
 
   const handleDeleteComment = () => {
-    dispatch(deleteComment(commentId));
+    dispatch(deleteComment(commentId, postId));
   };
 
   return (

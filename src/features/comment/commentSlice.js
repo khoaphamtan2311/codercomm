@@ -52,7 +52,8 @@ const slice = createSlice({
       state.commentsById[commentId].reactions = reactions;
     },
     deleteCommentSuccess(state, action) {
-      debugger;
+      // const commentId = action.payload;
+      console.log("action.payload", action.payload);
       const commentId = action.payload;
       delete state.commentsById[commentId];
       Object.keys(state.commentsByPost).forEach((postId) => {
@@ -129,12 +130,12 @@ export const sendCommentReaction =
       toast.error(error.message);
     }
   };
-export const deleteComment = (commentId) => async (dispatch) => {
-  debugger;
+export const deleteComment = (commentId, postId) => async (dispatch) => {
   dispatch(slice.actions.startLoading());
   try {
     const response = await apiService.delete(`comments/${commentId}`);
     dispatch(slice.actions.deleteCommentSuccess(response.data._id));
+    dispatch(getComments({ postId }));
   } catch (error) {
     dispatch(slice.actions.hasError(error.message));
     toast.error(error.message);

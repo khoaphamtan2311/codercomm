@@ -13,7 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CommentDeleteConfirm from "./CommentDeleteConfirm";
 import useAuth from "../../hooks/useAuth";
 
-function CommentCard({ comment }) {
+function CommentCard({ comment, postId }) {
   const [commentId, setCommentId] = useState("");
   const { user } = useAuth();
   return (
@@ -57,6 +57,7 @@ function CommentCard({ comment }) {
           open={!!commentId}
           setCommentId={setCommentId}
           commentId={commentId}
+          postId={postId}
         />
       )}
     </>
