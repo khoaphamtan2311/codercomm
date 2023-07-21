@@ -56,7 +56,7 @@ function PostEdit({ open, setIdPost, id, content, image }) {
 
       if (file) {
         setValue(
-          "image",
+          "newImage",
           Object.assign(file, {
             preview: URL.createObjectURL(file),
           })
@@ -89,7 +89,6 @@ function PostEdit({ open, setIdPost, id, content, image }) {
             {image ? (
               <>
                 <Typography>Editing your image:</Typography>
-                <img src={image} alt="post"></img>
                 <FUploadImage
                   name="newImage"
                   accept="image/*"

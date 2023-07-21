@@ -77,6 +77,7 @@ const slice = createSlice({
         ...state.postsById,
         [editPost._id]: editPost,
       };
+      state.postsById[editPost._id] = editPost;
     },
   },
 });
@@ -160,9 +161,10 @@ export const editPost =
     dispatch(slice.actions.startLoading());
     try {
       const imageUrl = await cloudinaryUpload(image);
+      console.log("imageUrl", imageUrl);
       const response = await apiService.put(`/posts/${postId}`, {
         content,
-        imageUrl,
+        image: imageUrl,
       });
       dispatch(slice.actions.editPostSuccess(response.data));
       toast.success("Edit successfully");
