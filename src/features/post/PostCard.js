@@ -31,7 +31,7 @@ function PostCard({ post }) {
         disableTypography
         avatar={
           <Avatar
-            src={post?.author?.avatarUrl}
+            src={post?.author?.avatarUrl || user.avatarUrl}
             alt={post?.author?.name || user.name}
           />
         }
