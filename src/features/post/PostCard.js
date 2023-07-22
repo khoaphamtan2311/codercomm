@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Link,
@@ -25,15 +25,15 @@ function PostCard({ post }) {
   //   setOpen(true);
   // };
   const { user } = useAuth();
-  const [exPostId] = useState(post.author._id);
-
-  console.log("exPostId:", exPostId);
   return (
     <Card>
       <CardHeader
         disableTypography
         avatar={
-          <Avatar src={post?.author?.avatarUrl} alt={post?.author?.name} />
+          <Avatar
+            src={post?.author?.avatarUrl}
+            alt={post?.author?.name || user.name}
+          />
         }
         title={
           <Link
@@ -43,7 +43,7 @@ function PostCard({ post }) {
             sx={{ fontWeight: 600 }}
             to={`/user/${post.author._id}`}
           >
-            {post?.author?.name}
+            {post?.author?.name || user.name}
           </Link>
         }
         subheader={
@@ -54,7 +54,11 @@ function PostCard({ post }) {
             {fDate(post.createdAt)}
           </Typography>
         }
-        action={exPostId === user._id && <PostMenu post={post} />}
+        action={
+          (user._id === post.author._id || user._id === post.author) && (
+            <PostMenu post={post} />
+          )
+        }
       />
 
       <Stack spacing={2} sx={{ p: 3 }}>
